@@ -35,6 +35,26 @@ public:
 	}
 };
 
+class Doubler
+{
+public:
+	void operator()(int& elem)
+	{
+		elem *= 2;
+	}
+};
+
+class Multiplier
+{
+	int number;
+public:
+	Multiplier(int number) : number(number) {}
+	void operator()(int& elem)
+	{
+		elem *= number;
+	}
+};
+
 int main()
 {
 	srand(time(0));
@@ -146,6 +166,46 @@ int main()
 	std::cout << "\n\nAfter (deleting all " << num << "):\n";
 
 	for (auto& elem : vec4)
+		std::cout << elem << ", ";
+	std::cout << "\n";
+
+	std::cout << "\nTask 5:\n\n";
+
+	std::vector<int> vec5;
+
+	for (int i = 0; i < 20; i++)
+		vec5.push_back(rand() % 20 + 10);
+
+	std::cout << "Before:\n";
+
+	for (auto& elem : vec5)
+		std::cout << elem << ", ";
+
+	std::for_each(vec5.begin(), vec5.end(), Doubler());
+
+	std::cout << "\n\nAfter (doubling):\n";
+
+	for (auto& elem : vec5)
+		std::cout << elem << ", ";
+	std::cout << "\n";
+
+	std::cout << "\nTask 6:\n\n";
+
+	std::vector<int> vec6;
+
+	for (int i = 0; i < 20; i++)
+		vec6.push_back(rand() % 20 + 10);
+
+	std::cout << "Before:\n";
+
+	for (auto& elem : vec6)
+		std::cout << elem << ", ";
+
+	std::for_each(vec6.begin(), vec6.end(), Multiplier(5));
+
+	std::cout << "\n\nAfter (multiplying by 5):\n";
+
+	for (auto& elem : vec6)
 		std::cout << elem << ", ";
 	std::cout << "\n";
 }
